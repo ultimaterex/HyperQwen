@@ -94,6 +94,30 @@ x-qwen: &qwen
   volumes:
     - ${MODELS_DIR:-./models}:/app/models
     - qwen-cache:/cache
+    # reasoning_effort "high" -> HTTP 400 fix (2026-09-16, found via
+    # noonghunna/club-3090's qwen38-reasoning-effort-template patch - see
+    # patches/reasoning-effort-high/PROVENANCE.md). Qwen3.8's chat template
+    # ladder is low/medium/xhigh - there is no "high" - and the stock
+    # template raise_exception()s on anything else. Both OpenAI and
+    # Anthropic default to low/medium/high, so any generic client sending
+    # the standard top rung gets a clean 400 on vLLM 0.28.0 here (club-3090
+    # saw an unhandled 500 on their older pin - our vLLM catches the same
+    # jinja TemplateError more gracefully, but the underlying template gap
+    # is identical). Confirmed via /v1/models and /health both still
+    # returning 200 while the chat request fails - looks healthy, isn't.
+    # This mounted template adds a 3-line alias: "high" -> "xhigh" (the
+    # real top rung, not "medium" - see PROVENANCE.md's "Why xhigh and not
+    # medium" for why a mid-point alias was rejected upstream). Traffic
+    # that sends no reasoning_effort is unaffected (server default is
+    # ENABLE_THINKING's own low/xhigh split, untouched). One bind mount per
+    # served checkpoint dir - all five share the identical byte-for-byte
+    # base template (sha256 c3cf9e34...81041, verified locally), so one
+    # patched file covers all of them.
+    - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-W4A16-AutoRound/chat_template.jinja:ro
+    - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-W4A16-AutoRound-fast/chat_template.jinja:ro
+    - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-W4A16-AutoRound-abliterated/Huihui-Qwen3.8-27B-abliterated-w4g128/chat_template.jinja:ro
+    - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-Uncensored-W4A16/chat_template.jinja:ro
+    - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-Uncensored-W4A16-leminkozey/chat_template.jinja:ro
 
 x-serve: &serve
   <<: *qwen
