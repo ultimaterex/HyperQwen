@@ -373,6 +373,33 @@ systemctl --user enable --now qwen-serving
 loginctl enable-linger $USER
 ```
 
+### Post-boot serving warmup (optional, off by default)
+
+`/health` can return 200 before the serving path has been exercised: the first
+real request still pays the first-batch transient allocation (gotcha 35) and
+may compile Triton variants the boot-time profile misses (gotcha 45's scope
+note — `_k_stats_kernel`, `_k_quant_kernel`, `_prefill_attn_kernel` still JIT
+in-request on the current production profile). `single-user/qwen-server.sh`
+wraps the launcher: it waits for `/health`, runs `bench/warmup.sh` (a small
+decode pass, then a concurrent one), and only then considers the server ready
+for traffic. It complements the kernel prewarm in #48, it does not replace it:
+
+```bash
+WARMUP=1 bash single-user/qwen-server.sh   # wait /health, warm, then serve
+bash single-user/qwen-server.sh            # default: plain boot, no warmup
+```
+
+The warmup pass costs 21-25 s on the reference 3090 (production profile, warm
+torch.compile cache; boot-to-health is 36-50 s on top of that). It is
+advisory: a health timeout or a failed warmup is logged and the wrapper serves
+anyway, so a drifted deploy tree cannot turn a healthy engine into a restart
+loop. `WARMUP_ATTEMPTS` / `WARMUP_INTERVAL` tune the health-wait window
+(120 × 5 s by default); a boot that never completes is bounded by systemd's
+`TimeoutStartSec`, not by this script.
+
+To enable it in the unit, set `ExecStart` to `qwen-server.sh` and add
+`Environment=WARMUP=1`.
+
 Point your chat client at `http://<host>:18020/v1` with the key from
 `api_key.txt`. Works with anything that speaks the OpenAI API, tool calling
 included (`tools` + `tool_choice: "auto"` come back as `tool_calls`).
@@ -397,7 +424,9 @@ included (`tools` + `tool_choice: "auto"` come back as `tool_calls`).
 | `VISION` | 0 | 1 keeps the vision tower instead of `--language-model-only` (0.858 GiB of BF16 weights on this checkpoint), for a client that sends images: one image per prompt and a 2048-image-token pixel cap, both overridable from `EXTRA_ARGS` |
 | `VISION_OFFLOAD` | 1 | with `VISION=1`, keeps the tower's weights in pinned host RAM and copies each module to the GPU for its own forward (`patches/vision-tower-cpu-offload.patch`). **On 24 GB, `SPEC=dflash2` + `VISION=1` does not boot with this off** — the tower is 0.85 GiB of the ~1.1 GiB transient margin, and graph capture OOMs allocating the 960 MiB split-KV verify buffer with 787 MiB free. With it on, the same config comes up at the full 69,758-token pool and reads images. Costs 296 → 333 ms of encode per 8192-patch image, output bit-exact. 0 only on a card with headroom to spare. `VLLM_VISION_CPU_OFFLOAD_GB` (default 1) is the budget in GiB |
 | `KV_OFFLOAD_GB` | unset (off) | **Local-only, not upstream** (docs/gotchas.md, gotcha 38 addendum, 2026-09-13) — this row describes our local `feature/kv-offload` branch's wiring, which the deployed `ghcr.io/syv-ai/qwen38-27b-rtx3090:latest` image does not build, so setting it in production is a silent no-op. CPU KV-cache offload tier, vLLM's native `OffloadingConnector` (0.27.1+): overflowed KV blocks move to pinned host RAM instead of being dropped, and a later hit for the same prefix transfers them back over PCIe instead of recomputing. GiB of host RAM to give the tier; ~80 KB/token at `CTX=fast` (same bytes/token as the GPU pool — 8 GiB ≈ 107k tokens of cold storage, roughly 1.5x the 69,758-token GPU-resident pool). Requires `PREFIX_CACHE=1` — refused otherwise, since this checkpoint's hybrid attention+DeltaNet layout needs prefix caching for the connector's block-size assertion — and forces `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False` (the connector refuses config validation against the expandable allocator this stack otherwise defaults to). **Do not use with `CTX=huge`**: KVarN's drafter sliding-window group has 128-token chunks against a 2,176-token block maximum, so the CPU tier allocates uniform blocks sized for the max and one long request can evict the whole tier — cross-request reuse will likely never hit (issue #33, gotcha 42). `patches/offload-dflash-eagle-groups.patch` warns at boot with the waste-factor multiplier (~17x measured here) instead of failing silently, but there's no RAM budget that makes it worth enabling at `CTX=huge` today. Verified clean at `CTX=fast` (this mode) and in `batch/start_qwen.sh` (no drafter there, so no asymmetric-chunk problem) |
-| `REQ_METRICS` | 0 | 1 = `--enable-per-request-metrics --enable-force-include-usage`: per-request timing fields in every response and `usage` on every request, the fields llama-swap's dashboard reads ([#51](https://github.com/syv-ai/qwen38-27b-rtx3090/issues/51)). `prompt_tokens_details.cached_tokens` is always on. Not compatible with `--disable-log-stats` in `EXTRA_ARGS`; vLLM's per-request spec-decode summary flag is nightly-only, not in 0.27.1 |
+| `REQ_METRICS` | 0 | 1 = `--enable-per-request-metrics --enable-force-include-usage`: per-request timing fields in every response and `usage` on every request, the fields llama-swap's dashboard reads ([#51](https://github.com/syv-ai/qwen38-27b-rtx3090/issues/51)). `prompt_tokens_details.cached_tokens` is always on. Not compatible with `--disable-log-stats` in `EXTRA_ARGS`; vLLM's per-request *spec-decode* summary flag is nightly-only, not in 0.27.1 |
+| `WARMUP` | 0 | `qwen-server.sh` only: 1 = wait for `/health`, then run `bench/warmup.sh` (21-25 s) before serving (see "Post-boot serving warmup"). Advisory — a failed warmup logs and serves anyway. Not read by `start_qwen.sh` itself |
+| `SSE_KEEP_ALIVE` | 30 | seconds between SSE `: keep-alive` comment lines on a streaming response, so an idle stream survives a proxy read timeout during a long prefill (Bifrost's default is 120 s; a 90K cold prefill takes ~105 s and sends nothing until it finishes). `0` passes the interval vLLM reads as off; empty drops the flag entirely, which is what a vLLM tree without `patches/sse-keep-alive.patch` needs |
 | `PORT` | 18020 | |
 
 ## Switching modes
