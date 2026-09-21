@@ -51,6 +51,15 @@ x-qwen: &qwen
   build: .
   pull_policy: missing
   ipc: host
+  # Run as the host user instead of the image's default root (no USER in
+  # its Dockerfile) - without this, every file the container writes under
+  # the models/ bind mount (prepare/'s quant output, int8 head/embed/mtp
+  # shrink, backup files, etc.) comes out root-owned, requiring a manual
+  # `sudo chown` before the host user can touch it. GPU access via the
+  # nvidia runtime and binding to ${PORT} (unprivileged, >1024) don't need
+  # root, so this has no functional downside. UID/GID default to 1000:1000
+  # (this box's `rex` user); override via .env if that ever differs.
+  user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
   env_file:
     - path: .env
       required: false
@@ -111,6 +120,21 @@ x-qwen: &qwen
     # container instead of falling through to the off default.
     VISION: ${VISION:-}
     VISION_OFFLOAD: ${VISION_OFFLOAD:-}
+    # MAX_LEN: same per-invocation forwarding gotcha as CTX/SPEC/MODEL
+    # above - start_qwen.sh reads it directly (single-user/start_qwen.sh:165
+    # onward, USER_MAX_LEN precedence chain), but it wasn't in this list
+    # before 2026-09-16, so any llama-swap.yml cmd: override silently never
+    # reached the container - it just fell through to each SPEC/CTX
+    # profile's own hardcoded default with no error. Found wiring up
+    # qwen-3.8-27b-syv-swift, which needed a smaller-than-default context
+    # budget to leave room for KV cache on an unusually large checkpoint.
+    MAX_LEN: ${MAX_LEN:-}
+    # MAX_SEQS: same forwarding gotcha as MAX_LEN above, found 2026-09-20 -
+    # llama-swap's qwen-3.8-27b-syv-swift-unc-2x90k set MAX_SEQS=2 but the
+    # engine ran max_num_seqs=64, because it was not in this list. Every
+    # launcher reads it as ${MAX_SEQS:-<default>}, so an empty value here
+    # falls back to each tier's own default.
+    MAX_SEQS: ${MAX_SEQS:-}
   volumes:
     - ${MODELS_DIR:-./models}:/app/models
     - qwen-cache:/cache
@@ -130,14 +154,18 @@ x-qwen: &qwen
     # medium" for why a mid-point alias was rejected upstream). Traffic
     # that sends no reasoning_effort is unaffected (server default is
     # ENABLE_THINKING's own low/xhigh split, untouched). One bind mount per
-    # served checkpoint dir - all five share the identical byte-for-byte
+    # served checkpoint dir - all six share the identical byte-for-byte
     # base template (sha256 c3cf9e34...81041, verified locally), so one
     # patched file covers all of them.
     - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-W4A16-AutoRound/chat_template.jinja:ro
     - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-W4A16-AutoRound-fast/chat_template.jinja:ro
     - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-W4A16-AutoRound-abliterated/Huihui-Qwen3.8-27B-abliterated-w4g128/chat_template.jinja:ro
     - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-Uncensored-W4A16/chat_template.jinja:ro
+    - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Swift-Qwen3.8-27b-W4A16-AutoRound/chat_template.jinja:ro
     - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-Uncensored-W4A16-leminkozey/chat_template.jinja:ro
+    - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-W4A16-AutoRound-swift-unc/Swift-Qwen3.8-27B-Uncensored-BF16-w4g128/chat_template.jinja:ro
+    - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Qwen3.8-27B-W4A16-AutoRound-swift-unc-gptq-full/chat_template.jinja:ro
+    - ./patches/reasoning-effort-high/chat_template.jinja:/app/models/Swift-Qwen3.8-27B-W4A16-syv-fast/chat_template.jinja:ro
 
 x-serve: &serve
   <<: *qwen

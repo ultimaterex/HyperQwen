@@ -72,7 +72,7 @@ for f in os.listdir(S):
     if f.startswith("model-0000") and f.endswith(".safetensors") and f != shard and not os.path.exists(D + f):
         os.link(S + f, D + f)
 for f in ["tokenizer.json", "model_extra_tensors.safetensors", "mtp_draft_vocab_ids.pt"]:
-    if not os.path.exists(D + f):
+    if os.path.exists(S + f) and not os.path.exists(D + f):
         os.link(S + f, D + f)
 for f in ["chat_template.jinja", "generation_config.json", "processor_config.json", "quantization_config.json", "tokenizer_config.json"]:
     shutil.copy(S + f, D + f)
