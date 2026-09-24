@@ -47,7 +47,9 @@ x-qwen: &qwen
   # local build. `docker compose build` (or `up --build`) still builds the
   # identical image under the same tag name. Immutable per-commit tags:
   # ghcr.io/syv-ai/hyperqwen:sha-<7>.
-  image: ghcr.io/syv-ai/hyperqwen:latest
+  # HQ_IMAGE: per-invocation image override (local). -2xl pins the pre-vLLM-0.29 image, because on
+  # 0.29 KVarN + MTP decodes 12-18% slower at long context (lower draft acceptance).
+  image: ${HQ_IMAGE:-ghcr.io/syv-ai/hyperqwen:latest}
   build: .
   pull_policy: missing
   ipc: host
