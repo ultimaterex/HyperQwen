@@ -1,0 +1,413 @@
+{
+ "tag": "S15",
+ "summary": {
+  "CORRECT": 35,
+  "WRONG": 5,
+  "DNF": 0,
+  "ERROR": 0,
+  "loops": 0,
+  "mean_completion_tokens": 2737
+ },
+ "items": [
+  {
+   "i": 0,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "8",
+   "gold": "8",
+   "completion_tokens": 1165,
+   "secs": 38.5
+  },
+  {
+   "i": 1,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "100",
+   "gold": "100",
+   "completion_tokens": 5580,
+   "secs": 87.6
+  },
+  {
+   "i": 2,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "27",
+   "gold": "27",
+   "completion_tokens": 9892,
+   "secs": 121.2
+  },
+  {
+   "i": 3,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "0",
+   "gold": "0",
+   "completion_tokens": 550,
+   "secs": 7.9
+  },
+  {
+   "i": 4,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "\\frac{14}{3}",
+   "gold": "\\frac{14}{3}",
+   "completion_tokens": 10253,
+   "secs": 134.8
+  },
+  {
+   "i": 5,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "2",
+   "gold": "2",
+   "completion_tokens": 454,
+   "secs": 6.3
+  },
+  {
+   "i": 6,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "-\\frac{24}{25}",
+   "gold": "-\\frac{24}{25}",
+   "completion_tokens": 607,
+   "secs": 8.1
+  },
+  {
+   "i": 7,
+   "status": "WRONG",
+   "loop": false,
+   "finish": "stop",
+   "answer": "\\frac12",
+   "gold": "\\frac{1}{2}",
+   "completion_tokens": 883,
+   "secs": 11.4
+  },
+  {
+   "i": 8,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "284",
+   "gold": "284",
+   "completion_tokens": 501,
+   "secs": 6.3
+  },
+  {
+   "i": 9,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "4",
+   "gold": "4",
+   "completion_tokens": 571,
+   "secs": 7.1
+  },
+  {
+   "i": 10,
+   "status": "WRONG",
+   "loop": false,
+   "finish": "stop",
+   "answer": "\\frac14",
+   "gold": "\\frac{1}{4}",
+   "completion_tokens": 4124,
+   "secs": 50.5
+  },
+  {
+   "i": 11,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "4",
+   "gold": "4",
+   "completion_tokens": 1947,
+   "secs": 23.8
+  },
+  {
+   "i": 12,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "540",
+   "gold": "540",
+   "completion_tokens": 922,
+   "secs": 13.1
+  },
+  {
+   "i": 13,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "29",
+   "gold": "29",
+   "completion_tokens": 1496,
+   "secs": 18.8
+  },
+  {
+   "i": 14,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "6",
+   "gold": "6",
+   "completion_tokens": 960,
+   "secs": 12.7
+  },
+  {
+   "i": 15,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "-1",
+   "gold": "-1",
+   "completion_tokens": 1094,
+   "secs": 15.7
+  },
+  {
+   "i": 16,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "p-q",
+   "gold": "p - q",
+   "completion_tokens": 785,
+   "secs": 8.9
+  },
+  {
+   "i": 17,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "44",
+   "gold": "44",
+   "completion_tokens": 808,
+   "secs": 11.5
+  },
+  {
+   "i": 18,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "10",
+   "gold": "10",
+   "completion_tokens": 306,
+   "secs": 4.2
+  },
+  {
+   "i": 19,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "(3,4]",
+   "gold": "(3,4]",
+   "completion_tokens": 10113,
+   "secs": 129.2
+  },
+  {
+   "i": 20,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "12",
+   "gold": "12",
+   "completion_tokens": 249,
+   "secs": 3.5
+  },
+  {
+   "i": 21,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "22",
+   "gold": "22",
+   "completion_tokens": 354,
+   "secs": 4.8
+  },
+  {
+   "i": 22,
+   "status": "WRONG",
+   "loop": false,
+   "finish": "stop",
+   "answer": "115",
+   "gold": "110",
+   "completion_tokens": 1652,
+   "secs": 19.4
+  },
+  {
+   "i": 23,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "6",
+   "gold": "6",
+   "completion_tokens": 1506,
+   "secs": 18.3
+  },
+  {
+   "i": 24,
+   "status": "WRONG",
+   "loop": false,
+   "finish": "stop",
+   "answer": "3",
+   "gold": "1",
+   "completion_tokens": 1737,
+   "secs": 20.2
+  },
+  {
+   "i": 25,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "\\frac{2}{1005}",
+   "gold": "\\frac{2}{1005}",
+   "completion_tokens": 12139,
+   "secs": 150.9
+  },
+  {
+   "i": 26,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "4",
+   "gold": "4",
+   "completion_tokens": 8003,
+   "secs": 96.9
+  },
+  {
+   "i": 27,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "1736",
+   "gold": "1736",
+   "completion_tokens": 4270,
+   "secs": 51.2
+  },
+  {
+   "i": 28,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "\\frac{11}{2}",
+   "gold": "\\frac{11}{2}",
+   "completion_tokens": 425,
+   "secs": 5.5
+  },
+  {
+   "i": 29,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "17",
+   "gold": "17",
+   "completion_tokens": 8018,
+   "secs": 102.6
+  },
+  {
+   "i": 30,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "25",
+   "gold": "25",
+   "completion_tokens": 430,
+   "secs": 5.6
+  },
+  {
+   "i": 31,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "12",
+   "gold": "12",
+   "completion_tokens": 754,
+   "secs": 9.1
+  },
+  {
+   "i": 32,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "28",
+   "gold": "28",
+   "completion_tokens": 90,
+   "secs": 2.1
+  },
+  {
+   "i": 33,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "19",
+   "gold": "19",
+   "completion_tokens": 3584,
+   "secs": 47.4
+  },
+  {
+   "i": 34,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "9",
+   "gold": "9",
+   "completion_tokens": 170,
+   "secs": 2.6
+  },
+  {
+   "i": 35,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "(2,\\infty)",
+   "gold": "(2,\\infty)",
+   "completion_tokens": 4926,
+   "secs": 60.3
+  },
+  {
+   "i": 36,
+   "status": "WRONG",
+   "loop": false,
+   "finish": "stop",
+   "answer": "1+\\sqrt{19},\\ 1-\\sqrt{19}",
+   "gold": "1 \\pm \\sqrt{19}",
+   "completion_tokens": 3013,
+   "secs": 31.7
+  },
+  {
+   "i": 37,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "8\\pi",
+   "gold": "8 \\pi",
+   "completion_tokens": 1733,
+   "secs": 19.7
+  },
+  {
+   "i": 38,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "2",
+   "gold": "2",
+   "completion_tokens": 2766,
+   "secs": 32.4
+  },
+  {
+   "i": 39,
+   "status": "CORRECT",
+   "loop": false,
+   "finish": "stop",
+   "answer": "81",
+   "gold": "81",
+   "completion_tokens": 657,
+   "secs": 7.6
+  }
+ ]
+}

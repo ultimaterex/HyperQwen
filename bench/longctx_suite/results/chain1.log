@@ -1,0 +1,75 @@
+=== t1 B boot 12:14:49  [PORT=18020 CUDA_VISIBLE_DEVICES=0 SPEC=off CTX=long MAX_LEN=70000 PREFIX_CACHE=0 VISION=0 MAX_SEQS=1 MODEL=/app/models/Qwen3.8-27B-W4A16-AutoRound-swift-unc-gptq-full-mtpfix-bf16lmhead ]
+(EngineCore pid=221) INFO 09-24 12:16:22 [kv_cache_utils.py:2229] GPU KV cache size: 186,170 tokens, Maximum concurrency for 70,000 tokens per request: 2.66x
+B pg19-0 64000 {'0-2k': 3.15372, '2-8k': 2.73742, '8-16k': 2.77856, '16-32k': 2.75203, '32-48k': 2.74287, '48-64k': 2.75236}
+B pg19-1 64000 {'0-2k': 2.35389, '2-8k': 2.03718, '8-16k': 1.91994, '16-32k': 1.97153, '32-48k': 1.95796, '48-64k': 1.9263}
+B pg19-2 64000 {'0-2k': 2.60544, '2-8k': 2.36256, '8-16k': 2.45484, '16-32k': 2.33635, '32-48k': 2.32173, '48-64k': 2.2978}
+B pg19-3 64000 {'0-2k': 2.39075, '2-8k': 2.3346, '8-16k': 2.19477, '16-32k': 2.19758, '32-48k': 2.27464, '48-64k': 2.18299}
+B pg19-4 64000 {'0-2k': 2.25357, '2-8k': 2.31226, '8-16k': 2.01487, '16-32k': 1.95466, '32-48k': 1.96646, '48-64k': 2.30402}
+B pg19-5 64000 {'0-2k': 2.3577, '2-8k': 2.31492, '8-16k': 2.38103, '16-32k': 2.15241, '32-48k': 2.18412, '48-64k': 2.11826}
+B code-a 64000 {'0-2k': 0.73725, '2-8k': 0.41244, '8-16k': 0.43082, '16-32k': 0.46266, '32-48k': 0.50237, '48-64k': 0.39224}
+B code-b 64000 {'0-2k': 0.62257, '2-8k': 0.35533, '8-16k': 0.51938, '16-32k': 0.58982, '32-48k': 0.39202, '48-64k': 0.434}
+MEAN B {'0-2k': 2.05936, '2-8k': 1.85834, '8-16k': 1.83678, '16-32k': 1.80213, '32-48k': 1.79277, '48-64k': 1.801}
+=== t1 B done 12:26:21
+=== t23 A boot 12:26:21  [PORT=18020 CUDA_VISIBLE_DEVICES=0 SPEC=mtp CTX=long MAX_LEN=196608 PREFIX_CACHE=1 INT8_ACT=int8 VISION=1 KV_OFFLOAD_GB=24 MAX_SEQS=2 MODEL=/app/models/Qwen3.8-27B-W4A16-AutoRound-swift-unc-gptq-full-mtpfix ]
+(EngineCore pid=226) INFO 09-24 12:27:04 [kv_cache_utils.py:2229] GPU KV cache size: 207,530 tokens, Maximum concurrency for 196,608 tokens per request: 1.06x
+A ep 0 CORRECT [(True, 1246, 'stop'), (True, 1242, 'stop'), (True, 795, 'stop'), (True, 887, 'stop'), (True, 913, 'stop'), (True, 728, 'stop')]
+A ep 1 CORRECT [(True, 1574, 'stop'), (True, 920, 'stop'), (True, 995, 'stop'), (True, 920, 'stop'), (True, 1118, 'stop'), (True, 724, 'stop')]
+A ep 2 CORRECT [(True, 813, 'stop'), (True, 2084, 'stop'), (True, 1285, 'stop'), (True, 858, 'stop'), (True, 1238, 'stop'), (True, 2373, 'stop')]
+A ep 3 CORRECT [(True, 633, 'stop'), (True, 658, 'stop'), (True, 681, 'stop'), (True, 1136, 'stop'), (True, 975, 'stop'), (True, 885, 'stop')]
+A ep 4 CORRECT [(True, 730, 'stop'), (True, 783, 'stop'), (True, 917, 'stop'), (True, 1880, 'stop'), (True, 1001, 'stop'), (True, 940, 'stop')]
+A ep 5 CORRECT [(True, 977, 'stop'), (True, 854, 'stop'), (True, 921, 'stop'), (True, 643, 'stop'), (True, 860, 'stop'), (True, 1078, 'stop')]
+A ep 6 CORRECT [(True, 879, 'stop'), (True, 565, 'stop'), (True, 782, 'stop'), (True, 590, 'stop'), (True, 772, 'stop'), (True, 931, 'stop')]
+A ep 7 CORRECT [(True, 862, 'stop'), (True, 1109, 'stop'), (True, 667, 'stop'), (True, 688, 'stop'), (True, 580, 'stop'), (True, 1362, 'stop')]
+A ep 8 CORRECT [(True, 937, 'stop'), (True, 1342, 'stop'), (True, 919, 'stop'), (True, 685, 'stop'), (True, 761, 'stop'), (True, 873, 'stop')]
+A ep 9 CORRECT [(True, 1881, 'stop'), (True, 948, 'stop'), (True, 763, 'stop'), (True, 723, 'stop'), (True, 800, 'stop'), (True, 780, 'stop')]
+A ep 10 CORRECT [(True, 1113, 'stop'), (True, 1103, 'stop'), (True, 830, 'stop'), (True, 1663, 'stop'), (True, 913, 'stop'), (True, 663, 'stop')]
+A ep 11 CORRECT [(True, 872, 'stop'), (True, 893, 'stop'), (True, 749, 'stop'), (True, 759, 'stop'), (True, 1079, 'stop'), (True, 765, 'stop')]
+SUMMARY A {'CORRECT': 12, 'WRONG': 0, 'DNF': 0, 'NO_STATE': 0, 'ERROR': 0, 'cycle_accuracy': 1.0, 'length_stops': 0, 'mean_completion_tokens': 970}
+A 0 CORRECT  1397 8 | gold 8
+A 1 CORRECT  5044 100 | gold 100
+A 2 CORRECT  6989 27 | gold 27
+A 3 CORRECT  572 0 | gold 0
+A 4 DNF  16000 None | gold \frac{14}{3}
+A 5 CORRECT  290 2 | gold 2
+A 6 CORRECT  776 -\frac{24}{25} | gold -\frac{24}{25}
+A 7 CORRECT  1627 \frac{1}{2} | gold \frac{1}{2}
+A 8 CORRECT  641 284 | gold 284
+A 9 CORRECT  702 4 | gold 4
+A 10 WRONG  2742 \frac14 | gold \frac{1}{4}
+A 11 CORRECT  1538 4 | gold 4
+A 12 CORRECT  1055 540 | gold 540
+A 13 CORRECT  2270 29 | gold 29
+A 14 CORRECT  721 6 | gold 6
+A 15 CORRECT  1968 -1 | gold -1
+A 16 CORRECT  728 p-q | gold p - q
+A 17 CORRECT  227 44 | gold 44
+A 18 CORRECT  296 10 | gold 10
+A 19 CORRECT  10038 (3,4] | gold (3,4]
+A 20 CORRECT  204 12 | gold 12
+A 21 CORRECT  500 22 | gold 22
+A 22 CORRECT  697 110 | gold 110
+A 23 CORRECT  1159 6 | gold 6
+A 24 CORRECT  4251 1 | gold 1
+A 25 DNF  16000 None | gold \frac{2}{1005}
+A 26 CORRECT  6846 4 | gold 4
+A 27 CORRECT  3008 1736 | gold 1736
+A 28 CORRECT  246 \frac{11}{2} | gold \frac{11}{2}
+A 29 CORRECT  15002 17 | gold 17
+A 30 CORRECT  438 25 | gold 25
+A 31 CORRECT  734 12 | gold 12
+A 32 CORRECT  190 28 | gold 28
+A 33 CORRECT  7408 19 | gold 19
+A 34 CORRECT  196 9 | gold 9
+A 35 CORRECT  4433 (2,\infty) | gold (2,\infty)
+A 36 WRONG  2581 1+\sqrt{19},\ 1-\sqrt{19} | gold 1 \pm \sqrt{19}
+A 37 CORRECT  1511 8\pi | gold 8 \pi
+A 38 CORRECT  2180 2 | gold 2
+A 39 CORRECT  566 81 | gold 81
+SUMMARY A {'CORRECT': 36, 'WRONG': 2, 'DNF': 2, 'ERROR': 0, 'loops': 0, 'mean_completion_tokens': 3094}
+=== t23 A done 13:00:52
+=== t23 B boot 13:00:52  [PORT=18020 CUDA_VISIBLE_DEVICES=0 SPEC=mtp CTX=long MAX_LEN=196608 PREFIX_CACHE=1 INT8_ACT=int8 VISION=1 KV_OFFLOAD_GB=24 MAX_SEQS=2 MODEL=/app/models/Qwen3.8-27B-W4A16-AutoRound-swift-unc-gptq-full-mtpfix-bf16lmhead ]
+=== B BOOT FAILED
+(EngineCore pid=228) ValueError: To serve at least one request with the model's max seq len (196608), (6.8 GiB KV cache is needed, which is larger than the available KV cache memory (5.42 GiB). Based on the available memory, the estimated maximum model length is 153920. Try increasing `gpu_memory_utilization` (which also controls CPU memory on the CPU backend) or decreasing `max_model_len` when initializing the engine. See https://docs.vllm.ai/en/latest/configuration/conserving_memory/ for more details.
+(APIServer pid=1)     raise RuntimeError(
+(APIServer pid=1) RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}
+CHAIN DONE

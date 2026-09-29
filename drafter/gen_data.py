@@ -23,7 +23,7 @@ def main():
     prompts = [json.loads(l) for l in open(f"{D}/prompts.jsonl")]
     if LIMIT:
         prompts = prompts[:LIMIT]
-    out_path = f"{D}/gen.jsonl"
+    out_path = os.environ.get("OUT", f"{D}/gen.jsonl")   # separate file per model: resume skips ids already in it
     done = set()
     if os.path.exists(out_path):
         for l in open(out_path):
