@@ -26,7 +26,7 @@ import numpy as np
 import torch
 
 MODEL = os.environ.get("MODEL", os.path.join(REPO, "models", "Qwen3.8-27B-W4A16-AutoRound"))
-D = os.path.join(HERE, "data")
+D = os.environ.get("DRAFT_DATA", os.path.join(HERE, "data"))   # per-model capture dir
 LIMIT = int(sys.argv[sys.argv.index("--limit") + 1]) if "--limit" in sys.argv else None
 HID = 5120
 MAX_LEN = 8192

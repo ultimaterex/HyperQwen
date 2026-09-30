@@ -1,0 +1,1 @@
+=== t1 D boot 13:21:52  [PORT=18020 CUDA_VISIBLE_DEVICES=0 SPEC=off CTX=long MAX_LEN=70000 PREFIX_CACHE=0 VISION=0 MAX_SEQS=1 MODEL=/app/models/Qwen3.8-27B-W4A16-AutoRound-swift-unc-gptq-full-mtpfix-bf16lmhead-bf16linattn EXTRA_ARGS=--cpu-offload-gb 10]

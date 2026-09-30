@@ -22,7 +22,8 @@ LIN = ["mtp.fc", "mtp.layers.0.mlp.down_proj", "mtp.layers.0.mlp.gate_proj", "mt
        "mtp.layers.0.self_attn.o_proj"]
 os.makedirs(D, exist_ok=True)
 for f in os.listdir(S):
-    if f.startswith("model-0000") and f.endswith(".safetensors") and not os.path.exists(D + f):
+    # any model-NNNNN-of-NNNNN shard (the old "model-0000" prefix silently skipped shards 10+ of a >9-shard export)
+    if f.startswith("model-") and f.endswith(".safetensors") and f != "model_extra_tensors.safetensors" and not os.path.exists(D + f):
         os.link(S + f, D + f)
 for f in ["tokenizer.json"]:
     if not os.path.exists(D + f):

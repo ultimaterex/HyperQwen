@@ -17,7 +17,7 @@ S = sys.argv[1].rstrip("/") + "/"; D = sys.argv[2].rstrip("/") + "/"
 BITS = int(sys.argv[sys.argv.index("--bits") + 1]) if "--bits" in sys.argv else 4
 NCAL = int(sys.argv[sys.argv.index("--calib-rows") + 1]) if "--calib-rows" in sys.argv else 400000
 MSE = "--mse-clip" in sys.argv
-DATA = os.path.join(HERE, "data")
+DATA = os.environ.get("DRAFT_DATA", os.path.join(HERE, "data"))   # per-model capture dir
 GROUP = 128
 dev = "cuda"
 

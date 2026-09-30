@@ -1,0 +1,99 @@
+=== t1 D boot 13:22:22  [PORT=18020 CUDA_VISIBLE_DEVICES=0 SPEC=off CTX=long MAX_LEN=70000 PREFIX_CACHE=0 VISION=0 MAX_SEQS=1 MODEL=/app/models/Qwen3.8-27B-W4A16-AutoRound-swift-unc-gptq-full-mtpfix-bf16lmhead-bf16linattn EXTRA_ARGS=--cpu-offload-gb=10]
+(EngineCore pid=219) INFO 09-24 13:25:02 [kv_cache_utils.py:2229] GPU KV cache size: 245,000 tokens, Maximum concurrency for 70,000 tokens per request: 3.50x
+D pg19-0 64000 {'0-2k': 3.15095, '2-8k': 2.73374, '8-16k': 2.77422, '16-32k': 2.74914, '32-48k': 2.74224, '48-64k': 2.74668}
+D pg19-1 64000 {'0-2k': 2.35125, '2-8k': 2.03685, '8-16k': 1.92013, '16-32k': 1.96695, '32-48k': 1.9551, '48-64k': 1.92252}
+D pg19-2 64000 {'0-2k': 2.60776, '2-8k': 2.35968, '8-16k': 2.45338, '16-32k': 2.33448, '32-48k': 2.31828, '48-64k': 2.2952}
+D pg19-3 64000 {'0-2k': 2.38829, '2-8k': 2.33117, '8-16k': 2.18982, '16-32k': 2.19281, '32-48k': 2.26968, '48-64k': 2.1799}
+D pg19-4 64000 {'0-2k': 2.25023, '2-8k': 2.31098, '8-16k': 2.01354, '16-32k': 1.95456, '32-48k': 1.96467, '48-64k': 2.302}
+D pg19-5 64000 {'0-2k': 2.35651, '2-8k': 2.31286, '8-16k': 2.37778, '16-32k': 2.15086, '32-48k': 2.18156, '48-64k': 2.11554}
+D code-a 64000 {'0-2k': 0.73815, '2-8k': 0.41532, '8-16k': 0.4318, '16-32k': 0.46088, '32-48k': 0.50057, '48-64k': 0.39084}
+D code-b 64000 {'0-2k': 0.61984, '2-8k': 0.35046, '8-16k': 0.5216, '16-32k': 0.58798, '32-48k': 0.39255, '48-64k': 0.4308}
+MEAN D {'0-2k': 2.05787, '2-8k': 1.85638, '8-16k': 1.83528, '16-32k': 1.79971, '32-48k': 1.79058, '48-64k': 1.79794}
+=== t1 D done 14:57:51
+=== t23 B boot 14:57:51  [PORT=18020 CUDA_VISIBLE_DEVICES=0 SPEC=mtp CTX=long MAX_LEN=196608 PREFIX_CACHE=1 INT8_ACT=int8 VISION=1 KV_OFFLOAD_GB=24 MAX_SEQS=2 MODEL=/app/models/Qwen3.8-27B-W4A16-AutoRound-swift-unc-gptq-full-mtpfix-bf16lmhead MAX_LEN=153600]
+(EngineCore pid=226) INFO 09-24 15:00:26 [kv_cache_utils.py:2229] GPU KV cache size: 154,367 tokens, Maximum concurrency for 153,600 tokens per request: 1.00x
+B ep 0 CORRECT [(True, 1262, 'stop'), (True, 798, 'stop'), (True, 1168, 'stop'), (True, 1277, 'stop'), (True, 1068, 'stop'), (True, 763, 'stop')]
+B ep 1 CORRECT [(True, 1118, 'stop'), (True, 611, 'stop'), (True, 954, 'stop'), (True, 895, 'stop'), (True, 539, 'stop'), (True, 741, 'stop')]
+B ep 2 CORRECT [(True, 812, 'stop'), (True, 660, 'stop'), (True, 728, 'stop'), (True, 1162, 'stop'), (True, 779, 'stop'), (True, 904, 'stop')]
+B ep 3 CORRECT [(True, 1438, 'stop'), (True, 526, 'stop'), (True, 936, 'stop'), (True, 802, 'stop'), (True, 795, 'stop'), (True, 629, 'stop')]
+B ep 4 WRONG [(True, 920, 'stop'), (True, 614, 'stop'), (True, 1139, 'stop'), (False, 540, 'stop'), (False, 945, 'stop'), (False, 574, 'stop')]
+B ep 5 CORRECT [(True, 960, 'stop'), (True, 1085, 'stop'), (True, 1175, 'stop'), (True, 655, 'stop'), (True, 1791, 'stop'), (True, 399, 'stop')]
+B ep 6 CORRECT [(True, 605, 'stop'), (True, 583, 'stop'), (True, 922, 'stop'), (True, 547, 'stop'), (True, 550, 'stop'), (True, 835, 'stop')]
+B ep 7 CORRECT [(True, 1835, 'stop'), (True, 784, 'stop'), (True, 911, 'stop'), (True, 598, 'stop'), (True, 661, 'stop'), (True, 1474, 'stop')]
+B ep 8 CORRECT [(True, 626, 'stop'), (True, 1136, 'stop'), (True, 974, 'stop'), (True, 1867, 'stop'), (True, 1437, 'stop'), (True, 755, 'stop')]
+B ep 9 CORRECT [(True, 991, 'stop'), (True, 589, 'stop'), (True, 728, 'stop'), (True, 1769, 'stop'), (True, 827, 'stop'), (True, 1003, 'stop')]
+B ep 10 CORRECT [(True, 904, 'stop'), (True, 1072, 'stop'), (True, 762, 'stop'), (True, 545, 'stop'), (True, 668, 'stop'), (True, 578, 'stop')]
+B ep 11 WRONG [(True, 1044, 'stop'), (True, 1145, 'stop'), (True, 426, 'stop'), (True, 1109, 'stop'), (True, 555, 'stop'), (False, 727, 'stop')]
+SUMMARY B {'CORRECT': 10, 'WRONG': 2, 'DNF': 0, 'NO_STATE': 0, 'ERROR': 0, 'cycle_accuracy': 0.944, 'length_stops': 0, 'mean_completion_tokens': 899}
+B 0 CORRECT  1300 8 | gold 8
+B 1 CORRECT  5470 100 | gold 100
+B 2 CORRECT  9979 27 | gold 27
+B 3 CORRECT  706 0 | gold 0
+B 4 CORRECT  12279 \frac{14}{3} | gold \frac{14}{3}
+B 5 CORRECT  425 2 | gold 2
+B 6 CORRECT  654 -\frac{24}{25} | gold -\frac{24}{25}
+B 7 WRONG  878 \frac12 | gold \frac{1}{2}
+B 8 CORRECT  515 284 | gold 284
+B 9 CORRECT  557 4 | gold 4
+B 10 WRONG  7353 \frac14 | gold \frac{1}{4}
+B 11 CORRECT  1138 4 | gold 4
+B 12 CORRECT  1174 540 | gold 540
+B 13 CORRECT  2442 29 | gold 29
+B 14 CORRECT  630 6 | gold 6
+B 15 CORRECT  2215 -1 | gold -1
+B 16 CORRECT  492 p-q | gold p - q
+B 17 CORRECT  326 44 | gold 44
+B 18 CORRECT  277 10 | gold 10
+B 19 DNF  16000 (3,4] | gold (3,4]
+B 20 CORRECT  214 12 | gold 12
+B 21 CORRECT  369 22 | gold 22
+B 22 WRONG  4674 115 | gold 110
+B 23 CORRECT  1282 6 | gold 6
+B 24 CORRECT  4251 1 | gold 1
+B 25 DNF  16000 None | gold \frac{2}{1005}
+B 26 CORRECT  7250 4 | gold 4
+B 27 CORRECT  1363 1736 | gold 1736
+B 28 CORRECT  283 \frac{11}{2} | gold \frac{11}{2}
+B 29 CORRECT  11550 17 | gold 17
+B 30 CORRECT  396 25 | gold 25
+B 31 CORRECT  600 12 | gold 12
+B 32 CORRECT  183 28 | gold 28
+B 33 CORRECT  3860 19 | gold 19
+B 34 CORRECT  173 9 | gold 9
+B 35 CORRECT  6102 (2,\infty) | gold (2,\infty)
+B 36 WRONG  8284 1+\sqrt{19},\; 1-\sqrt{19} | gold 1 \pm \sqrt{19}
+B 37 CORRECT  1900 8\pi | gold 8 \pi
+B 38 CORRECT  2096 2 | gold 2
+B 39 CORRECT  371 81 | gold 81
+SUMMARY B {'CORRECT': 34, 'WRONG': 4, 'DNF': 2, 'ERROR': 0, 'loops': 0, 'mean_completion_tokens': 3400}
+=== t23 B done 15:36:36
+=== hard A boot 15:36:36
+A-hard ep 0 CORRECT [(True, 1658, 'stop'), (True, 1711, 'stop'), (True, 1255, 'stop'), (True, 2267, 'stop'), (True, 2186, 'stop'), (True, 1538, 'stop'), (True, 2187, 'stop'), (True, 1565, 'stop'), (True, 970, 'stop'), (True, 1238, 'stop')]
+A-hard ep 1 CORRECT [(True, 1980, 'stop'), (True, 2697, 'stop'), (True, 1400, 'stop'), (True, 1473, 'stop'), (True, 1497, 'stop'), (True, 1323, 'stop'), (True, 1994, 'stop'), (True, 1472, 'stop'), (True, 2021, 'stop'), (True, 2395, 'stop')]
+A-hard ep 2 CORRECT [(True, 973, 'stop'), (True, 1308, 'stop'), (True, 1455, 'stop'), (True, 1556, 'stop'), (True, 4138, 'stop'), (True, 1073, 'stop'), (True, 1165, 'stop'), (True, 1569, 'stop'), (True, 1273, 'stop'), (True, 1613, 'stop')]
+A-hard ep 3 WRONG [(True, 1619, 'stop'), (True, 997, 'stop'), (True, 2270, 'stop'), (True, 1616, 'stop'), (True, 1566, 'stop'), (True, 1804, 'stop'), (False, 1827, 'stop'), (False, 1443, 'stop'), (False, 1711, 'stop'), (False, 1162, 'stop')]
+A-hard ep 4 WRONG [(False, 1340, 'stop'), (False, 2282, 'stop'), (False, 1685, 'stop'), (False, 2108, 'stop'), (False, 1337, 'stop'), (False, 2696, 'stop'), (False, 1113, 'stop'), (False, 1453, 'stop'), (False, 1044, 'stop'), (False, 1698, 'stop')]
+A-hard ep 5 WRONG [(True, 815, 'stop'), (True, 1525, 'stop'), (True, 1346, 'stop'), (True, 1779, 'stop'), (True, 1193, 'stop'), (True, 4230, 'stop'), (False, 1393, 'stop'), (False, 1583, 'stop'), (False, 1911, 'stop'), (False, 1065, 'stop')]
+A-hard ep 6 CORRECT [(True, 1622, 'stop'), (True, 935, 'stop'), (True, 2521, 'stop'), (True, 1344, 'stop'), (True, 1019, 'stop'), (True, 1314, 'stop'), (True, 1049, 'stop'), (True, 1261, 'stop'), (True, 1541, 'stop'), (True, 1717, 'stop')]
+A-hard ep 7 CORRECT [(True, 1521, 'stop'), (True, 871, 'stop'), (True, 1021, 'stop'), (True, 1499, 'stop'), (True, 1768, 'stop'), (True, 1256, 'stop'), (True, 1419, 'stop'), (True, 973, 'stop'), (True, 1813, 'stop'), (True, 1826, 'stop')]
+A-hard ep 8 CORRECT [(True, 1198, 'stop'), (True, 1232, 'stop'), (True, 1126, 'stop'), (True, 1055, 'stop'), (True, 1173, 'stop'), (True, 1380, 'stop'), (True, 1866, 'stop'), (True, 1626, 'stop'), (True, 1508, 'stop'), (True, 864, 'stop')]
+A-hard ep 9 CORRECT [(True, 1279, 'stop'), (True, 1893, 'stop'), (True, 1613, 'stop'), (True, 2245, 'stop'), (True, 1458, 'stop'), (True, 1478, 'stop'), (True, 1736, 'stop'), (True, 3855, 'stop'), (True, 1842, 'stop'), (True, 1738, 'stop')]
+A-hard ep 10 CORRECT [(True, 978, 'stop'), (True, 1357, 'stop'), (True, 1388, 'stop'), (True, 1690, 'stop'), (True, 978, 'stop'), (True, 836, 'stop'), (True, 2328, 'stop'), (True, 2400, 'stop'), (True, 1695, 'stop'), (True, 1920, 'stop')]
+A-hard ep 11 CORRECT [(True, 1689, 'stop'), (True, 1312, 'stop'), (True, 1982, 'stop'), (True, 1907, 'stop'), (True, 1046, 'stop'), (True, 2347, 'stop'), (True, 1607, 'stop'), (True, 1527, 'stop'), (True, 2099, 'stop'), (True, 903, 'stop')]
+SUMMARY A-hard {'CORRECT': 9, 'WRONG': 3, 'DNF': 0, 'NO_STATE': 0, 'ERROR': 0, 'cycle_accuracy': 0.85, 'length_stops': 0, 'mean_completion_tokens': 1608}
+=== hard B boot 16:33:06
+B-hard ep 0 DNF [(True, 1217, 'stop'), (False, 16000, 'length')]
+B-hard ep 1 CORRECT [(True, 1315, 'stop'), (True, 1875, 'stop'), (True, 803, 'stop'), (True, 1048, 'stop'), (True, 1815, 'stop'), (True, 1172, 'stop'), (True, 1843, 'stop'), (True, 1441, 'stop'), (True, 2071, 'stop'), (True, 994, 'stop')]
+B-hard ep 2 WRONG [(True, 1317, 'stop'), (True, 5285, 'stop'), (True, 2192, 'stop'), (True, 1049, 'stop'), (False, 1675, 'stop'), (False, 1660, 'stop'), (False, 978, 'stop'), (False, 1482, 'stop'), (False, 1185, 'stop'), (False, 1125, 'stop')]
+B-hard ep 3 CORRECT [(True, 1521, 'stop'), (True, 1090, 'stop'), (True, 1066, 'stop'), (True, 1875, 'stop'), (True, 1180, 'stop'), (True, 2434, 'stop'), (True, 1143, 'stop'), (True, 1451, 'stop'), (True, 2085, 'stop'), (True, 1974, 'stop')]
+B-hard ep 4 WRONG [(False, 1598, 'stop'), (False, 1017, 'stop'), (False, 1660, 'stop'), (False, 1836, 'stop'), (False, 1948, 'stop'), (False, 1153, 'stop'), (False, 1558, 'stop'), (False, 1296, 'stop'), (False, 1586, 'stop'), (False, 1617, 'stop')]
+B-hard ep 5 CORRECT [(True, 883, 'stop'), (True, 1027, 'stop'), (True, 1840, 'stop'), (True, 2424, 'stop'), (True, 1227, 'stop'), (True, 15829, 'stop'), (True, 1324, 'stop'), (True, 1290, 'stop'), (True, 1857, 'stop'), (True, 941, 'stop')]
+B-hard ep 6 CORRECT [(True, 1699, 'stop'), (True, 2024, 'stop'), (True, 1112, 'stop'), (True, 2242, 'stop'), (True, 1242, 'stop'), (True, 2015, 'stop'), (True, 1273, 'stop'), (True, 1231, 'stop'), (True, 1090, 'stop'), (True, 1959, 'stop')]
+B-hard ep 7 WRONG [(True, 1546, 'stop'), (True, 841, 'stop'), (True, 1737, 'stop'), (False, 934, 'stop'), (False, 1307, 'stop'), (False, 1114, 'stop'), (False, 2112, 'stop'), (False, 1551, 'stop'), (False, 1399, 'stop'), (False, 929, 'stop')]
+B-hard ep 8 CORRECT [(True, 1315, 'stop'), (True, 1376, 'stop'), (True, 558, 'stop'), (True, 1212, 'stop'), (True, 1485, 'stop'), (True, 1567, 'stop'), (True, 1233, 'stop'), (True, 1058, 'stop'), (True, 1460, 'stop'), (True, 1091, 'stop')]
+B-hard ep 9 CORRECT [(True, 2138, 'stop'), (True, 1032, 'stop'), (True, 749, 'stop'), (True, 1336, 'stop'), (True, 1933, 'stop'), (True, 1059, 'stop'), (True, 1771, 'stop'), (True, 3949, 'stop'), (True, 1867, 'stop'), (True, 1707, 'stop')]
+B-hard ep 10 CORRECT [(True, 2563, 'stop'), (True, 1294, 'stop'), (True, 1092, 'stop'), (True, 1815, 'stop'), (True, 1047, 'stop'), (True, 1915, 'stop'), (True, 892, 'stop'), (True, 1486, 'stop'), (True, 1410, 'stop'), (True, 1800, 'stop')]
+B-hard ep 11 CORRECT [(True, 1689, 'stop'), (True, 3001, 'stop'), (True, 1243, 'stop'), (True, 1648, 'stop'), (True, 1380, 'stop'), (True, 1590, 'stop'), (True, 1108, 'stop'), (True, 1742, 'stop'), (True, 2071, 'stop'), (True, 1407, 'stop')]
+SUMMARY B-hard {'CORRECT': 8, 'WRONG': 3, 'DNF': 1, 'NO_STATE': 0, 'ERROR': 0, 'cycle_accuracy': 0.786, 'length_stops': 1, 'mean_completion_tokens': 1792}
+HARD DONE
+QUEUE2 DONE

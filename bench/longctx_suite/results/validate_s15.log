@@ -1,0 +1,80 @@
+=== 1. quality battery (SPEC=off CTX=fast) 12:06:10
+s15_fast PPL {'en': (10.9215, 11175), 'da': (11.0583, 13917), 'code': (3.3618, 7587), 'all': (8.3518, 32679)} 31s
+s15_fast GSM8K n=200 acc=0.970 mean_tokens=350 217s
+=== 2+3. refusal + -2x workload bench 12:12:12
+(EngineCore pid=225) INFO 09-26 12:14:43 [kv_cache_utils.py:2229] GPU KV cache size: 207,530 tokens, Maximum concurrency for 196,608 tokens per reques
+REFUSALS s15: heretic-default 20/100, strict 4/100
+DONE S15_2x
+MTP mean acceptance length over run: 2.73 (24 intervals)
+=== 4. long-context suite 12:24:19
+=== t1 S15 boot 12:24:19  [PORT=18020 CUDA_VISIBLE_DEVICES=0 SPEC=off CTX=long MAX_LEN=70000 PREFIX_CACHE=0 VISION=0 MAX_SEQS=1 MODEL=/app/models/Swift-1.5-Qwen3.8-27B-Uncensored-W4A16-AutoRound-fast ]
+(EngineCore pid=218) INFO 09-26 12:25:58 [kv_cache_utils.py:2229] GPU KV cache size: 238,297 tokens, Maximum concurrency for 70,000 tokens per request: 3.40x
+S15 pg19-0 64000 {'0-2k': 3.16849, '2-8k': 2.74868, '8-16k': 2.791, '16-32k': 2.77037, '32-48k': 2.7611, '48-64k': 2.76753}
+S15 pg19-1 64000 {'0-2k': 2.37612, '2-8k': 2.05615, '8-16k': 1.93462, '16-32k': 1.98771, '32-48k': 1.97334, '48-64k': 1.94588}
+S15 pg19-2 64000 {'0-2k': 2.62135, '2-8k': 2.37643, '8-16k': 2.4696, '16-32k': 2.35185, '32-48k': 2.33359, '48-64k': 2.31485}
+S15 pg19-3 64000 {'0-2k': 2.40321, '2-8k': 2.34885, '8-16k': 2.20251, '16-32k': 2.21391, '32-48k': 2.29184, '48-64k': 2.19786}
+S15 pg19-4 64000 {'0-2k': 2.26482, '2-8k': 2.32968, '8-16k': 2.02818, '16-32k': 1.96813, '32-48k': 1.98003, '48-64k': 2.32252}
+S15 pg19-5 64000 {'0-2k': 2.38088, '2-8k': 2.33482, '8-16k': 2.39477, '16-32k': 2.16797, '32-48k': 2.20258, '48-64k': 2.13193}
+S15 code-a 64000 {'0-2k': 0.74212, '2-8k': 0.42833, '8-16k': 0.43746, '16-32k': 0.468, '32-48k': 0.50423, '48-64k': 0.39549}
+S15 code-b 64000 {'0-2k': 0.61992, '2-8k': 0.36487, '8-16k': 0.52584, '16-32k': 0.59843, '32-48k': 0.40499, '48-64k': 0.44716}
+MEAN S15 {'0-2k': 2.07211, '2-8k': 1.87348, '8-16k': 1.848, '16-32k': 1.8158, '32-48k': 1.80646, '48-64k': 1.8154}
+=== t1 S15 done 12:35:55
+=== t23 S15 boot 12:35:55  [PORT=18020 CUDA_VISIBLE_DEVICES=0 SPEC=mtp CTX=long MAX_LEN=196608 PREFIX_CACHE=1 INT8_ACT=int8 VISION=1 KV_OFFLOAD_GB=24 MAX_SEQS=2 MODEL=/app/models/Swift-1.5-Qwen3.8-27B-Uncensored-W4A16-AutoRound-fast ]
+(EngineCore pid=227) INFO 09-26 12:36:35 [kv_cache_utils.py:2229] GPU KV cache size: 207,530 tokens, Maximum concurrency for 196,608 tokens per request: 1.06x
+S15 ep 0 CORRECT [(True, 1118, 'stop'), (True, 907, 'stop'), (True, 858, 'stop'), (True, 1239, 'stop'), (True, 941, 'stop'), (True, 915, 'stop')]
+S15 ep 1 CORRECT [(True, 764, 'stop'), (True, 771, 'stop'), (True, 828, 'stop'), (True, 1136, 'stop'), (True, 751, 'stop'), (True, 1042, 'stop')]
+S15 ep 2 CORRECT [(True, 1171, 'stop'), (True, 864, 'stop'), (True, 1071, 'stop'), (True, 833, 'stop'), (True, 1025, 'stop'), (True, 630, 'stop')]
+S15 ep 3 CORRECT [(True, 677, 'stop'), (True, 931, 'stop'), (True, 880, 'stop'), (True, 684, 'stop'), (True, 844, 'stop'), (True, 576, 'stop')]
+S15 ep 4 CORRECT [(True, 931, 'stop'), (True, 778, 'stop'), (True, 818, 'stop'), (True, 930, 'stop'), (True, 1068, 'stop'), (True, 1091, 'stop')]
+S15 ep 5 CORRECT [(True, 1072, 'stop'), (True, 1245, 'stop'), (True, 550, 'stop'), (True, 1018, 'stop'), (True, 799, 'stop'), (True, 879, 'stop')]
+S15 ep 6 CORRECT [(True, 578, 'stop'), (True, 673, 'stop'), (True, 826, 'stop'), (True, 660, 'stop'), (True, 923, 'stop'), (True, 699, 'stop')]
+S15 ep 7 CORRECT [(True, 823, 'stop'), (True, 834, 'stop'), (True, 713, 'stop'), (True, 1019, 'stop'), (True, 820, 'stop'), (True, 1519, 'stop')]
+S15 ep 8 CORRECT [(True, 914, 'stop'), (True, 801, 'stop'), (True, 1046, 'stop'), (True, 754, 'stop'), (True, 1045, 'stop'), (True, 731, 'stop')]
+S15 ep 9 CORRECT [(True, 779, 'stop'), (True, 679, 'stop'), (True, 741, 'stop'), (True, 647, 'stop'), (True, 714, 'stop'), (True, 956, 'stop')]
+S15 ep 10 CORRECT [(True, 884, 'stop'), (True, 1209, 'stop'), (True, 817, 'stop'), (True, 888, 'stop'), (True, 929, 'stop'), (True, 835, 'stop')]
+S15 ep 11 CORRECT [(True, 899, 'stop'), (True, 920, 'stop'), (True, 679, 'stop'), (True, 888, 'stop'), (True, 691, 'stop'), (True, 1004, 'stop')]
+SUMMARY S15 {'CORRECT': 12, 'WRONG': 0, 'DNF': 0, 'NO_STATE': 0, 'ERROR': 0, 'cycle_accuracy': 1.0, 'length_stops': 0, 'mean_completion_tokens': 877}
+S15 0 CORRECT  1165 8 | gold 8
+S15 1 CORRECT  5580 100 | gold 100
+S15 2 CORRECT  9892 27 | gold 27
+S15 3 CORRECT  550 0 | gold 0
+S15 4 CORRECT  10253 \frac{14}{3} | gold \frac{14}{3}
+S15 5 CORRECT  454 2 | gold 2
+S15 6 CORRECT  607 -\frac{24}{25} | gold -\frac{24}{25}
+S15 7 WRONG  883 \frac12 | gold \frac{1}{2}
+S15 8 CORRECT  501 284 | gold 284
+S15 9 CORRECT  571 4 | gold 4
+S15 10 WRONG  4124 \frac14 | gold \frac{1}{4}
+S15 11 CORRECT  1947 4 | gold 4
+S15 12 CORRECT  922 540 | gold 540
+S15 13 CORRECT  1496 29 | gold 29
+S15 14 CORRECT  960 6 | gold 6
+S15 15 CORRECT  1094 -1 | gold -1
+S15 16 CORRECT  785 p-q | gold p - q
+S15 17 CORRECT  808 44 | gold 44
+S15 18 CORRECT  306 10 | gold 10
+S15 19 CORRECT  10113 (3,4] | gold (3,4]
+S15 20 CORRECT  249 12 | gold 12
+S15 21 CORRECT  354 22 | gold 22
+S15 22 WRONG  1652 115 | gold 110
+S15 23 CORRECT  1506 6 | gold 6
+S15 24 WRONG  1737 3 | gold 1
+S15 25 CORRECT  12139 \frac{2}{1005} | gold \frac{2}{1005}
+S15 26 CORRECT  8003 4 | gold 4
+S15 27 CORRECT  4270 1736 | gold 1736
+S15 28 CORRECT  425 \frac{11}{2} | gold \frac{11}{2}
+S15 29 CORRECT  8018 17 | gold 17
+S15 30 CORRECT  430 25 | gold 25
+S15 31 CORRECT  754 12 | gold 12
+S15 32 CORRECT  90 28 | gold 28
+S15 33 CORRECT  3584 19 | gold 19
+S15 34 CORRECT  170 9 | gold 9
+S15 35 CORRECT  4926 (2,\infty) | gold (2,\infty)
+S15 36 WRONG  3013 1+\sqrt{19},\ 1-\sqrt{19} | gold 1 \pm \sqrt{19}
+S15 37 CORRECT  1733 8\pi | gold 8 \pi
+S15 38 CORRECT  2766 2 | gold 2
+S15 39 CORRECT  657 81 | gold 81
+SUMMARY S15 {'CORRECT': 35, 'WRONG': 5, 'DNF': 0, 'ERROR': 0, 'loops': 0, 'mean_completion_tokens': 2737}
+=== t23 S15 done 13:08:18
+SUMMARY S15-hard {'CORRECT': 10, 'WRONG': 2, 'DNF': 0, 'NO_STATE': 0, 'ERROR': 0, 'cycle_accuracy': 0.833, 'length_stops': 0, 'mean_completion_tokens': 1610}
+=== VALIDATION DONE 14:05:25
